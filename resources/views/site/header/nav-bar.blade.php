@@ -13,6 +13,7 @@
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ route('indexAdmin') }}">Admin</a></li>
 
                 </ul>
             </nav><!-- .nav-menu -->
