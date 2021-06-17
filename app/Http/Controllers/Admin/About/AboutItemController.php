@@ -85,7 +85,6 @@ class AboutItemController extends Controller
         $aboutItem->updateField($request, 'list_item');
         $aboutItem->updateFieldStatus($request);
         $aboutItem->setDate($request->date, 'updated_at');
-//        dd($aboutItem->about->id, $request->mainElement);
 
         if($request->exists('mainElement') && strpos($request->mainElement, (string)$aboutItem->about->id) === false ) {
             $idKey = explode(' - ', $request->mainElement);

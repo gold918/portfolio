@@ -13,6 +13,7 @@
         <section class="content">
 
             <!-- Default box -->
+            @can('section-dashboard', $userRoles)
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Главная страница</h3>
@@ -26,6 +27,15 @@
                 </div>
                 <!-- /.box-footer-->
             </div>
+            @endcan
+
+            @cannot('section-dashboard', $userRoles)
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title" style="color: red">Спасибо за регистрацию. Пожалуйста, обратитесь к администратору для получения соответствующих прав.</h3>
+                </div>
+            </div>
+            @endcannot
             <!-- /.box -->
 
         </section>

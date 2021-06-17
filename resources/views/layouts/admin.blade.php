@@ -40,7 +40,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
+<!--                    <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
@@ -48,9 +48,9 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 4 messages</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
                                 <ul class="menu">
-                                    <li><!-- start message -->
+                                    <li>&lt;!&ndash; start message &ndash;&gt;
                                         <a href="#">
                                             <div class="pull-left">
                                                 <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -62,14 +62,14 @@
                                             <p>Why not buy a new awesome theme?</p>
                                         </a>
                                     </li>
-                                    <!-- end message -->
+                                    &lt;!&ndash; end message &ndash;&gt;
                                 </ul>
                             </li>
                             <li class="footer"><a href="#">See All Messages</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
+<!--                    <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">10</span>
@@ -77,7 +77,7 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 10 notifications</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
                                 <ul class="menu">
                                     <li>
                                         <a href="#">
@@ -88,9 +88,9 @@
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
+<!--                    <li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger">9</span>
@@ -98,9 +98,9 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 9 tasks</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
                                 <ul class="menu">
-                                    <li><!-- Task item -->
+                                    <li>&lt;!&ndash; Task item &ndash;&gt;
                                         <a href="#">
                                             <h3>
                                                 Design some buttons
@@ -113,53 +113,43 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
+                                    &lt;!&ndash; end task item &ndash;&gt;
                                 </ul>
                             </li>
                             <li class="footer">
                                 <a href="#">View all tasks</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            @if(!empty(Auth::user()->photo))
+                                <img src="{{ asset('img/users/' . Auth::user()->photo) }}" class="user-image" alt="User Image">
+                            @else
+                                <img src="{{ asset('img/users/user-default.png') }}" class="user-image" alt="User Image">
+                            @endif
+                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                @if(!empty(Auth::user()->photo))
+                                <img src="{{ asset('img/users/' . Auth::user()->photo) }}" class="img-circle" alt="User Image">
+                                @else
+                                <img src="{{ asset('img/users/user-default.png') }}" class="img-circle" alt="User Image">
+                                @endif
 
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{ Auth::user()->name }}
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
                             <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
+                            <li class="user-footer pull-right" style="background: transparent">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                    <input type="submit" value="Sign out" class="btn btn-default btn-flat">
+                                </form>
                             </li>
                         </ul>
                     </li>
@@ -181,11 +171,15 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    @if(!empty(Auth::user()->photo))
+                    <img src="{{ asset('img/users/' . Auth::user()->photo) }}" class="img-circle" style="border-radius: 50%; height: 45px" alt="User Image">
+                    @else
+                    <img src="{{ asset('img/users/user-default.png') }}" class="img-circle" style="border-radius: 50%; height: 45px" alt="User Image">
+                    @endif
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>{{ Auth::user()->name }}</p>
+                    <p style="font-size: 11px" ><i class="fa fa-circle text-success"></i> Online</p>
                 </div>
             </div>
             <!-- search form -->

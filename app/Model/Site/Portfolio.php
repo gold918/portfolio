@@ -12,7 +12,8 @@ class Portfolio extends Model
 
     public function filters()
     {
-        return $this->belongsToMany(Filter::class, 'filters_portfolio')->where('status', 1)                                                                                                            ->where('created_at', '<=', Carbon::now())
+        return $this->belongsToMany(Filter::class, 'filters_portfolio')->where('status', 1)
+                                                                                    ->where('created_at', '<=', Carbon::now())
                                                                                    ->where('updated_at', '<=', Carbon::now());
     }
 

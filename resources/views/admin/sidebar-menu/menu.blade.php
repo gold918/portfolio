@@ -1,10 +1,11 @@
 <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
     <li class="treeview">
-        <a href="#">
+        <a href="{{ route('indexAdmin') }}">
             <i class="fa fa-dashboard"></i> <span>Админ-панель</span>
         </a>
     </li>
+    @can('section-dashboard', $userRoles)
     <li><a href="{{ route('admin.hero') }}"><i class="fa fa-globe"></i> <span>Hero Section</span></a></li>
     <li><a href="{{ route('admin.about') }}"><i class="fa fa-sticky-note-o"></i> <span>About Section</span></a></li>
     <li><a href="{{ route('admin.client') }}"><i class="fa fa-magnet "></i> <span>Clients Section</span></a></li>
@@ -18,5 +19,8 @@
     <li><a href="{{ route('admin.contact') }}"><i class="fa fa-phone"></i> <span>Contacts</span></a></li>
     <li><a href="{{ route('admin.map') }}"><i class="fa fa-phone"></i> <span>Map</span></a></li>
     <li><a href="{{ route('admin.social') }}"><i class="fa fa-phone"></i> <span>Socials</span></a></li>
-    <li><a href="#"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+    @endcan
+    @can('user-dashboard', $userRoles)
+    <li><a href="{{ route('admin.user') }}"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+    @endcan
 </ul>

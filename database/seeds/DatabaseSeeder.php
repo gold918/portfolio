@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MapSeeder::class);
         $this->call(ContactSeeder::class);
         $this->call(SiteSocialSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(RuleSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

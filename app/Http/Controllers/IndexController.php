@@ -21,6 +21,7 @@ use App\Model\Site\SiteSocial;
 use App\Model\Site\Subscriber;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use App\Jobs\SendMailJob;
 
 class IndexController extends Controller
 {
@@ -49,11 +50,13 @@ class IndexController extends Controller
                 }
             } else {
                 $data = $request->all();
-                Mail::send('mail.mail', ['data' => $data], function ($message) use ($data) {
+                SendMailJob::dispatch($data)->onQueue('send_mail');
+                return response('OK');
+/*                Mail::send('mail.mail', ['data' => $data], function ($message) use ($data) {
                     $message->from($data['email']);
                     $message->to('test7689t@gmail.com')->subject($data['subject']);
                     echo 'OK';
-                });
+                });*/
             }
 
         }
