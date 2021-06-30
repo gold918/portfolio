@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['get', 'post'], '/', ['uses' => 'IndexController@execute', 'as' => 'index']);
+Route::post('/subscribe', ['uses' => 'SubscribeController@add', 'as' => 'subscribe']);
 
 Auth::routes();
 

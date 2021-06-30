@@ -28,27 +28,7 @@ class IndexController extends Controller
     public function execute(Request $request)
     {
         if ($request->isMethod('POST')) {
-            if (!empty($request->subscribe)) {
-                try {
-                    $validator = Validator::make($request->all(), [
-                        'subscribe' => 'email|unique:subscribers,mail',
-                    ]);
-                    if ($validator->fails())
-                    {
-                        return response()->json($validator->errors()->all(), 500);
-                    }
-                    $subscribe = new Subscriber([
-                        'mail' => $request->subscribe,
-                    ]);
-                    $subscribe->save();
 
-                    return response()->json('Email успешно сохранен!');
-
-
-                } catch (\Exception $e) {
-                   return response()->json($e->getMessage(), 500);
-                }
-            } else {
                 $data = $request->all();
                 SendMailJob::dispatch($data)->onQueue('send_mail');
                 return response('OK');
@@ -57,8 +37,6 @@ class IndexController extends Controller
                     $message->to('test7689t@gmail.com')->subject($data['subject']);
                     echo 'OK';
                 });*/
-            }
-
         }
         if ($request->isMethod('GET')) {
             $hero = HeroMain::with('heroIconBoxes')->where('status', 1)

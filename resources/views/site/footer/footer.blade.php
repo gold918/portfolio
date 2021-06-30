@@ -57,10 +57,10 @@
                 <div class="col-lg-4 col-md-6 footer-newsletter">
                     <h4>Our Newsletter</h4>
                     <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="{{ route('index') }}" method="post" class="subscribe">
+                    <form action="{{ route('subscribe') }}" method="post" class="subscribe">
                         <input type="email" name="subscribe">
                         @csrf
-                        <input type="submit" value="Subscribe">
+                        <input type="submit" value="Subscribe" name="subscribe_submit">
                     </form>
 
                 </div>
