@@ -10,16 +10,6 @@ use App\Model\Site\Portfolio;
 class PortfolioController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @param int $singleId
@@ -28,8 +18,13 @@ class PortfolioController extends Controller
     public function create($singleId)
     {
         $elements = Filter::pluck('name');
+        $currentFilter = Filter::find($singleId)->name;
         if(view()->exists('admin.portfolio.portfolio.create')) {
-            return view('admin.portfolio.portfolio.create', ['singleId' => $singleId, 'elements' => $elements]);
+            return view('admin.portfolio.portfolio.create', [
+                                                                    'singleId' => $singleId,
+                                                                    'elements' => $elements,
+                                                                    'currentFilter' => $currentFilter,
+                                                                                                        ]);
         }
         abort(404);
     }

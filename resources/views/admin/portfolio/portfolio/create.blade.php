@@ -39,7 +39,10 @@
                                 <select class="form-control select2" name="elements[]" multiple="multiple" data-placeholder="Выберите элементы" style="width: 100%;">
                                     @foreach($elements as $name)
                                         <option
-                                            @if(in_array($name, old('elements', [])) ) selected @endif
+                                            @if (in_array($name, old('elements', [])) ) selected @endif
+                                            @if (empty(old('elements', [])) && $name === $currentFilter) selected
+                                            @endif
+
                                         >
                                             {{ $name }}
                                         </option>
